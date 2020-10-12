@@ -33,14 +33,14 @@ public class PersonController {
 		return personService.getAllPersons();
 	}
 	
-	@PostMapping("persons/withEmailPassword")
+	@PutMapping("persons")
 	public Person findPerson(@RequestBody  Login login) {
 		System.out.println("withEmailPassword login : " +login.toString());
 		
 		return  personService.findPerson(login.getEmail(), login.getPassword());
 	}
 	
-	@PutMapping("persons/addPerson")
+	@PostMapping("persons")
 	public void addPerson(@RequestBody  Person person) {
 		System.out.println("addPerson person : " +person.toString());
 		
@@ -52,7 +52,7 @@ public class PersonController {
 		}
 	}
 	
-	@DeleteMapping("persons/deletePerson/{id}")
+	@DeleteMapping("persons/{id}")
 	public void deletePerson(@PathVariable ("id") int id) {
 		System.out.println("deletePerson person id : " + id);
 		try {
@@ -65,7 +65,7 @@ public class PersonController {
 	}
 	
 	
-	@PutMapping("persons/changePassword/{newPswd}")
+	@PutMapping("persons/{newPswd}")
 	public void changePassword(@RequestBody  Person person, @PathVariable ("newPswd") String newPswd) {
 		System.out.println("changePassword person : " +person.toString() + " newPswd " + newPswd);
 		
