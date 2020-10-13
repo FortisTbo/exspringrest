@@ -33,7 +33,7 @@ public class PersonController {
 		return personService.getAllPersons();
 	}
 	
-	@PutMapping("persons")
+	@PostMapping("persons/login")
 	public Person findPerson(@RequestBody  Login login) {
 		System.out.println("withEmailPassword login : " +login.toString());
 		
@@ -65,12 +65,14 @@ public class PersonController {
 	}
 	
 	
-	@PutMapping("persons/{newPswd}")
-	public void changePassword(@RequestBody  Person person, @PathVariable ("newPswd") String newPswd) {
-		System.out.println("changePassword person : " +person.toString() + " newPswd " + newPswd);
+	@PutMapping("persons/{id}")
+	public void changePassword(@RequestBody  Login login, @PathVariable ("id") int id) {
+		System.out.println("changePassword person : " +  login.toString() + " id " + id);
+		
+		Person person = personService.findPerson(id);
 		
 		try {
-			personService.changePassword(person, newPswd);
+			personService.changePassword(person, login.getPassword());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
