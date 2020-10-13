@@ -2,9 +2,9 @@ package be.abis.exercise.service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,12 +23,15 @@ public class ApiPersonService implements PersonService {
 
 	@Override
 	public ArrayList<Person> getAllPersons() {
-
-		return null;
+		System.out.println("ExB1 getAllPersons");
+		ResponseEntity<ArrayList<Person>> persons = rt.exchange(baseUri,  HttpMethod.GET, null, new ParameterizedTypeReference<ArrayList<Person>>(){});
+		ArrayList<Person> personList = persons.getBody();
+		return personList;
 	}
 
 	@Override
 	public Person findPerson(int id) {
+		System.out.println("ExB1 findPerson");
 		Person p = rt.getForObject(baseUri+"/"+id, Person.class);
 		return p;
 	}

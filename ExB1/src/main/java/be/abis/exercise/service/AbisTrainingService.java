@@ -39,6 +39,7 @@ public class AbisTrainingService implements TrainingService {
 
 	@Override
 	public Person findPerson(int id) {
+		System.out.println("ExB1 findPerson in AbisTrainingService");
 		return personService.findPerson(id);
 	}
 
