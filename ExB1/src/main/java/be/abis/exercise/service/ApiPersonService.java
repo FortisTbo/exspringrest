@@ -38,6 +38,7 @@ public class ApiPersonService implements PersonService {
 
 	@Override
 	public Person findPerson(String emailAddress, String passWord) {
+		System.out.println("ExB1 findPerson with Login");
 		Login login = new Login();
 		login.setEmail(emailAddress);
 		login.setPassword(passWord);
@@ -47,20 +48,23 @@ public class ApiPersonService implements PersonService {
 
 	@Override
 	public void addPerson(Person p) throws IOException {
-		// TODO Auto-generated method stub
-
+		System.out.println("ExB1 addPerson");
+		rt.postForObject(baseUri, p,  Void.class);
 	}
 
 	@Override
 	public void deletePerson(int id) throws PersonCanNotBeDeletedException {
-		// TODO Auto-generated method stub
+		System.out.println("ExB1 deletePerson");
+		rt.delete(baseUri+"/"+ id);
 
 	}
 
 	@Override
 	public void changePassword(Person p, String newPswd) throws IOException {
-		// TODO Auto-generated method stub
-
+		System.out.println("ExB1 changePassword");
+		Login login = new Login();
+		login.setPassword(newPswd);
+		rt.put(baseUri+"/"+p.getPersonId(), login);
 	}
 
 }
